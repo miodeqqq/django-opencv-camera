@@ -44,6 +44,7 @@ PROJECT_APPS = (
 THIRD_PARTY_APPS = (
     'suit',
     'django.contrib.admin',
+    'django_cleanup',
 )
 
 INSTALLED_APPS = DEFAULT_APPS + PROJECT_APPS + THIRD_PARTY_APPS

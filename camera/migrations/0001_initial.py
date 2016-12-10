@@ -14,13 +14,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Image',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
                 ('title', models.CharField(verbose_name='Image title', max_length=255)),
-                ('image', models.ImageField(blank=True, upload_to=camera.models.upload_images_path, verbose_name='Image file', null=True)),
+                ('image', models.ImageField(verbose_name='Image file', blank=True, upload_to=camera.models.upload_images_path, null=True)),
+                ('date_created', models.DateTimeField(auto_now_add=True)),
             ],
             options={
-                'verbose_name_plural': 'Images',
                 'verbose_name': 'Image',
+                'verbose_name_plural': 'Images',
             },
         ),
     ]
