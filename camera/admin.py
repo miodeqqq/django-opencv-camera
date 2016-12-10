@@ -1,5 +1,20 @@
 # -*- coding: utf-8 -*-
 
+
+import os
+
 from django.contrib import admin
 
-# Register your models here.
+from .models import Image
+
+
+@admin.register(Image)
+class ImageAdmin(admin.ModelAdmin):
+    """
+    Admin for Image model.
+    """
+
+    list_display = [
+        'title',
+        'image'
+    ]

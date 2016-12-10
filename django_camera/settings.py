@@ -137,9 +137,9 @@ SUIT_CONFIG = {
 
     'MENU': (
         '-',
-        # {'app': 'crawler', 'label': 'Camera', 'icon': 'icon-file', 'models': (
-        #     ('camera',)
-        # )},
-        # '-',
+        {'app': 'camera', 'label': 'Camera', 'icon': 'icon-file', 'models': (
+            ('image',)
+        )},
+        '-',
     ),
 }

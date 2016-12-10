@@ -1,2 +1,4 @@
 Django==1.8.17
 django-suit==0.2.23
+numpy==1.11.2
+Pillow==3.4.2
