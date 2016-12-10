@@ -37,7 +37,7 @@ DEFAULT_APPS = (
 )
 
 PROJECT_APPS = (
-    # 'camera',
+    'camera',
 
 )
 
@@ -137,8 +137,8 @@ SUIT_CONFIG = {
 
     'MENU': (
         '-',
-        # {'app': 'crawler', 'label': 'Crawler', 'icon': 'icon-file', 'models': (
-        #     ('pubmedarticle',)
+        # {'app': 'crawler', 'label': 'Camera', 'icon': 'icon-file', 'models': (
+        #     ('camera',)
         # )},
         # '-',
     ),

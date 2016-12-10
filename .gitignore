@@ -147,6 +147,12 @@ pyvenv.cfg
 .venv
 pip-selfcheck.json
 
+# project staff
+media/
+static/suit/
+static/cms/
+static/admin/
+
 #db
 db.sqlite3
 

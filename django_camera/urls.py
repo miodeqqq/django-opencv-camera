@@ -10,5 +10,5 @@ urlpatterns = [
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}, name='static'),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}, name='media'),
     url(r'^', include(admin.site.urls)),
-    # url(r'', include('camera.urls')),
+    url(r'', include('camera.urls')),
 ]
