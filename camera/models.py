@@ -9,7 +9,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.text import slugify
 
-from .utils import detect_faces_on_image, detect_eyes_on_image
+from .utils import detect_faces_on_image, detect_eyes_on_image, detect_barcode_on_image
 
 def upload_images_path(instance, filename):
     """
@@ -32,12 +32,14 @@ class Image(models.Model):
     TYPE_CHOICES = (
         (0, 'Face recognition'),
         (1, 'Eyes recognition'),
+        (2, 'Barcode recognition'),
     )
 
     title = models.CharField('Image title', max_length=255)
-    image = models.ImageField('Image file', upload_to=upload_images_path, blank=True, null=True)
+    input_image = models.ImageField('Input image', upload_to=upload_images_path, blank=True, null=True)
+    output_image = models.ImageField('Output image', upload_to=upload_images_path, blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True, editable=False)
-    type = models.BooleanField('Type of processing', help_text='Choose a proper algorithm.', choices=TYPE_CHOICES, default=0)
+    type = models.IntegerField('Type of processing', help_text='Choose a proper algorithm.', choices=TYPE_CHOICES, default=0)
     processing_output_info = models.CharField('Processing info output', blank=True, max_length=255)
 
     def __unicode__(self):
@@ -53,6 +55,9 @@ def detect_faces(sender, instance, **kwargs):
     if kwargs.get('created', False):
         if instance.type == 0:
             detect_faces_on_image(instance)
-        else:
+        elif instance.type == 1:
             detect_eyes_on_image(instance)
+        else:
+            detect_barcode_on_image(instance)
+
         instance.save()
