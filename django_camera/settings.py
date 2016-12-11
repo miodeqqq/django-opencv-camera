@@ -24,9 +24,11 @@ SECRET_KEY = get_secret("SECRET_KEY")
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-DEBUG = False
+DEBUG = True
+# DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['*']
 
 DEFAULT_APPS = (
     'django.contrib.auth',

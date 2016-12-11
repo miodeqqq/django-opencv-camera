@@ -26,11 +26,9 @@ def detect_eyes_on_image(instance):
 
             try:
                 image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
                 faces = faceCascade.detectMultiScale(image)
 
                 for (x, y, w, h) in faces:
-                    cv2.rectangle(image, (x, y), (x + w, y + h), 255, 2)
                     roi = image[y:y + h, x:x + w]
 
                     eyes = eyesCascade.detectMultiScale(roi)
@@ -38,7 +36,12 @@ def detect_eyes_on_image(instance):
                     for (ex, ey, ew, eh) in eyes:
                         cv2.rectangle(roi, (ex, ey), (ex + ew, ey + eh), 255, 2)
 
+                    instance.processing_output_info = u'Eyes found: {}'.format(len(eyes)) if len(eyes) > 0 else u'No eyes found!'
+
                 cv2.imwrite(os.path.join(instance.image.path), image)
+
+
+                instance.save()
 
             except IOError as io:
                 print('Error --> {}'.format(io))
@@ -70,6 +73,9 @@ def detect_faces_on_image(instance):
                     cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
                 cv2.imwrite(os.path.join(instance.image.path), image)
+
+                instance.processing_output_info = u'Faces found: {}'.format(len(faces)) if len(faces) > 0 else u'No faces found!'
+                instance.save()
 
             except IOError as io:
                 print('Error --> {}'.format(io))

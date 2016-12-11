@@ -19,8 +19,11 @@ class ImageAdmin(admin.ModelAdmin):
     list_display = [
         'title',
         'get_processed_image_url',
+        'processing_output_info',
         'date_created'
     ]
+
+    readonly_fields = ['processing_output_info',]
 
     def get_processed_image_url(self, obj):
         if obj.image:

@@ -38,9 +38,10 @@ class Image(models.Model):
     image = models.ImageField('Image file', upload_to=upload_images_path, blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True, editable=False)
     type = models.BooleanField('Type of processing', help_text='Choose a proper algorithm.', choices=TYPE_CHOICES, default=0)
+    processing_output_info = models.CharField('Processing info output', blank=True, max_length=255)
 
-    def __str__(self):
-        return self.title
+    def __unicode__(self):
+        return unicode(self.title)
 
     class Meta:
         verbose_name = 'Image'
