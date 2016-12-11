@@ -1,5 +1,6 @@
 Django==1.8.17
 django-cleanup==0.4.2
 django-suit==0.2.23
+gunicorn==19.6.0
 numpy==1.11.2
 Pillow==3.4.2
