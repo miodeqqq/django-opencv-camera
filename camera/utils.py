@@ -7,11 +7,19 @@ import numpy as np
 from django.conf import settings
 from django.core.files.base import ContentFile
 
-facePath = os.path.join(settings.BASE_DIR, 'haarcascades/haarcascade_frontalface_default.xml')
-eyesPath = os.path.join(settings.BASE_DIR, 'haarcascades/haarcascade_eye.xml')
 
-faceCascade = cv2.CascadeClassifier(facePath)
-eyesCascade = cv2.CascadeClassifier(eyesPath)
+def prepare_classifiers():
+    """
+    General method to prepare classifiers.
+    """
+
+    classifiers_dict = {
+        'frontal_face_default': os.path.join(settings.BASE_DIR, 'haarcascades/haarcascade_frontalface_default.xml'),
+        'eyes': os.path.join(settings.BASE_DIR, 'haarcascades/haarcascade_eye.xml.xml'),
+
+    }
+
+    return classifiers_dict
 
 
 def detect_barcode_on_image(instance):
@@ -28,8 +36,20 @@ def detect_barcode_on_image(instance):
             try:
                 image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-                gradX = cv2.Sobel(image, ddepth=cv2.cv.CV_32F, dx=1, dy=0, ksize=-1)
-                gradY = cv2.Sobel(image, ddepth=cv2.cv.CV_32F, dx=0, dy=1, ksize=-1)
+                gradX = cv2.Sobel(
+                    image,
+                    ddepth=cv2.cv.CV_32F,
+                    dx=1,
+                    dy=0,
+                    ksize=-1
+                )
+
+                gradY = cv2.Sobel(
+                    image,
+                    ddepth=cv2.cv.CV_32F,
+                    dx=0,
+                    dy=1, ksize=-1
+                )
 
                 gradient = cv2.subtract(gradX, gradY)
                 gradient = cv2.convertScaleAbs(gradient)
@@ -80,9 +100,14 @@ def detect_eyes_on_image(instance):
 
     if instance.input_image:
 
+        classifiers = prepare_classifiers()
+
         with open(instance.input_image.path, 'rb') as img_source:
 
             img = cv2.imdecode(np.frombuffer(img_source.read(), np.uint8), -1)
+
+            faceCascade = cv2.CascadeClassifier(classifiers.get('frontal_face_default', None))
+            eyesCascade = cv2.CascadeClassifier(classifiers.get('eyes', None))
 
             try:
                 image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -96,8 +121,7 @@ def detect_eyes_on_image(instance):
                     for (ex, ey, ew, eh) in eyes:
                         cv2.rectangle(roi, (ex, ey), (ex + ew, ey + eh), 255, 2)
 
-                    instance.processing_output_info = u'Eyes found: {}'.format(len(eyes)) if len(
-                        eyes) > 0 else u'No eyes found!'
+                    instance.processing_output_info = u'Eyes found: {}'.format(len(eyes)) if len(eyes) > 0 else u'No eyes found!'
 
                 image_file_name = instance.input_image.path.split('/')[-1]
                 output_image_file = ContentFile(image)
@@ -123,9 +147,13 @@ def detect_faces_on_image(instance):
 
     if instance.input_image:
 
+        classifiers = prepare_classifiers()
+
         with open(instance.input_image.path, 'rb') as img_source:
 
             img = cv2.imdecode(np.frombuffer(img_source.read(), np.uint8), -1)
+
+            faceCascade = cv2.CascadeClassifier(classifiers.get('frontal_face_default', None))
 
             try:
                 image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -141,8 +169,7 @@ def detect_faces_on_image(instance):
                 for (x, y, w, h) in faces:
                     cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
-                instance.processing_output_info = u'Faces found: {}'.format(len(faces)) if len(
-                    faces) > 0 else u'No faces found!'
+                instance.processing_output_info = u'Faces found: {}'.format(len(faces)) if len(faces) > 0 else u'No faces found!'
 
                 image_file_name = instance.input_image.path.split('/')[-1]
                 output_image_file = ContentFile(image)

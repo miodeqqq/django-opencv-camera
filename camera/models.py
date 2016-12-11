@@ -50,8 +50,8 @@ class Image(models.Model):
         verbose_name_plural = 'Images'
 
 
-@receiver(post_save, sender=Image, dispatch_uid='detect_faces')
-def detect_faces(sender, instance, **kwargs):
+@receiver(post_save, sender=Image, dispatch_uid='algorithms_processing')
+def algorithms_processing(sender, instance, **kwargs):
     if kwargs.get('created', False):
         if instance.type == 0:
             detect_faces_on_image(instance)

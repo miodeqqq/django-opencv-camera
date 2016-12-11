@@ -13,4 +13,4 @@ kill -9 `ps aux | grep gunicorn | awk '{print $2}'`
 echo
 
 echo 'Django & OpenCV at http://localhost:8000'
-gunicorn pubmed_crawler.wsgi:application --bind 0.0.0.0:8000 --daemon
+gunicorn django_camera.wsgi:application --bind localhost:8000 --daemon --workers 8
