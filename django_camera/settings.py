@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'django_camera.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'opencv_with_django.sqlite3'),
     }
 }
 
@@ -136,11 +136,11 @@ LOGGING = {
 }
 
 SUIT_CONFIG = {
-    'ADMIN_NAME': 'Django & OpenCV v1.0',
+    'ADMIN_NAME': 'Django & OpenCV v1.1',
 
     'MENU': (
         '-',
-        {'app': 'camera', 'label': 'Camera', 'icon': 'icon-file', 'models': (
+        {'app': 'camera', 'label': 'OpenCV algorithms', 'icon': 'icon-folder-open', 'models': (
             ('image',)
         )},
         '-',

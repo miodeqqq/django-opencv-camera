@@ -1,8 +1,8 @@
 Django & OpenCV features
 ========================
 
-Current stable version: v1.0
-Release date: 10.12.2016
+Current stable version: v1.1
+Release date: 17.12.2016
 
 ### Authors:
 
@@ -11,4 +11,4 @@ Release date: 10.12.2016
 
 ### About the project
 
-Simple Django app with usage of OpenCV features - face recognition etc.
+Simple Django app with usage of OpenCV features - face/eyes/cats/barcode recognition etc.

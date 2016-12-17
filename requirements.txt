@@ -1,6 +1,14 @@
 Django==1.8.17
+django-autocomplete-light==3.2.1
 django-cleanup==0.4.2
 django-suit==0.2.23
+django-tagging==0.4.5
 gunicorn==19.6.0
 numpy==1.11.2
+oauthlib==2.0.1
 Pillow==3.4.2
+python-openid==2.2.5
+requests==2.12.3
+requests-oauthlib==0.7.0
+sorl-thumbnail==12.3
+swapper==1.0.0
