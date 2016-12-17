@@ -154,5 +154,5 @@ static/cms/
 static/admin/
 
 #db
-db.sqlite3
+opencv_with_django.sqlite3
 

@@ -1,3 +1,10 @@
+### Version v1.1
+
+**Release date: 17.12.2016**
+
+* Added algorithm for cat faces recognition;
+* Common fixes with other algorithms;
+
 ### Version v1.0
 
 **Release date: 10.12.2016**

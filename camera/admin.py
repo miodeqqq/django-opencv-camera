@@ -24,9 +24,9 @@ class ImageAdmin(admin.ModelAdmin):
         'date_created'
     ]
 
-    exclude = ['output_image',]
+    exclude = ['output_image', ]
 
-    readonly_fields = ['processing_output_info',]
+    readonly_fields = ['processing_output_info', ]
 
     def get_input_image_url(self, obj):
         if obj.input_image:
